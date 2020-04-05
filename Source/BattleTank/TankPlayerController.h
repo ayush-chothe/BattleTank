@@ -4,11 +4,11 @@
 #include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Engine/World.h"
 #include "TankPlayerController.generated.h"
 
-/**
- * 
- */
+
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
@@ -19,8 +19,22 @@ protected:
 public:
 
 	virtual void Tick(float DeltaTime) override;
+private:
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairYLocation = 0.3333;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000;
 
 	ATank* GetControlledTank() const;
+
 	void AimTowardsCrosshair();
+
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+	bool GetLookVectorHitLocation(FVector& HitLocation, FVector LookDirection) const;
 };
