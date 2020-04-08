@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 #include "Engine/World.h"
 #include "CoreMinimal.h"
@@ -6,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 #include "TankAimingComponent.generated.h"
+class UTankBarrel;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -22,7 +22,9 @@ protected:
 
 private:
 
-	UStaticMeshComponent* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr;
+	 
+	void MoveBarrel(FVector AimDirection);
 
 public:	
 	// Called every frame
@@ -30,5 +32,5 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 };
